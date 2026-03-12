@@ -4,7 +4,7 @@ const initialState = {
     projects: []
 }
 
-export const projectsSlice = createSlice({
+const projectsSlice = createSlice({
     name: "projects",
     initialState,
     reducers: {
@@ -12,9 +12,7 @@ export const projectsSlice = createSlice({
             state.projects.push(action.payload);
         },
         removeProject: (state, action) => {
-            state.projects = state.projects.filter(e => {
-                return e !== action.payload;
-            });
+            state.projects = state.projects.filter(e => e !== action.payload);
         }
     }
 });
