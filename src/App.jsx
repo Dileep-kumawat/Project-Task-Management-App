@@ -1,21 +1,38 @@
 import { useDispatch, useSelector } from "react-redux"
-import { addProject, removeProject } from "./features/projects/projectsSlice";
+import { addTask, deleteTask, editTask } from "./features/tasks/taskSlice";
+import { selectTasksByProject } from "./features/tasks/taskSelectors";
 
 const App = () => {
-    const { projects } = useSelector(state => state.projects);
+    const tasks = useSelector(state => selectTasksByProject(state, "demo id"));
     const dispatch = useDispatch();
+    console.log(tasks);
     return (
         <div>
-            App
-            {projects}
+            {JSON.stringify(tasks)} <br />
             <button
-                onClick={() => { dispatch(addProject("hey")); }}
-            >Add project</button>
+                onClick={() => {
+                    dispatch(addTask({
+                        id: "task id 2",
+                        title: "task",
+                        projectId: "demo id",
+                        status: "todo | in-progress | done",
+                        priority: "low | medium | high"
+                    }));
+                }}
+            >Add Task</button>
             <button
-                onClick={() => { dispatch(removeProject("hey")); }}
-            >Remove project</button>
+                onClick={() => { dispatch(deleteTask({ id: "task id 2" })); }}
+            >Remove Task</button>
+            <button
+                onClick={() => {
+                    dispatch(editTask({
+                        id: "task id 2",
+                        title: "task 2"
+                    }));
+                }}
+            >update Task</button>
         </div>
     )
 }
 
-export default App
+export default App;
