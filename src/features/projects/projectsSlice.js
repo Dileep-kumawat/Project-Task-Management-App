@@ -1,28 +1,30 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    projects: [
-        {
-            id: "demo id",
-            title: "demo",
-            description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illo, minus aliquam earum atque consequuntur quis placeat, ratione fuga consequatur minima neque possimus excepturi esse error quia hic? Nisi, quae, temporibus amet eaque quisquam in modi error accusantium reiciendis adipisci sapiente voluptate dolor doloremque officiis exercitationem est optio. Sapiente, assumenda eaque?"
-        }
-    ]
+    projects: [],
+    loading: true
 }
 
-const projectsSlice = createSlice({
+export const projectsSlice = createSlice({
     name: "projects",
     initialState,
     reducers: {
+        setProjects: (state, action) => {
+            state.projects = action.payload;
+            state.loading = false;
+        },
         addProject: (state, action) => {
             state.projects.push(action.payload);
         },
-        removeProject: (state, action) => {
-            state.projects = state.projects.filter(e => e !== action.payload);
+        deleteProject: (state, action) => {
+            state.projects = state.projects.filter(p => p.id !== action.payload);
+        },
+        setLoading: (state, action) => {
+            state.loading = action.payload;
         }
     }
 });
 
-export const { addProject, removeProject } = projectsSlice.actions;
+export const { setProjects, addProject, deleteProject, setLoading } = projectsSlice.actions;
 
 export default projectsSlice.reducer;
