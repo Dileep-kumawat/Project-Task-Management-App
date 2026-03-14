@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { formatDate } from "../utils/formatDate";
+import MoveMenu from "./MoveMenu";
 
 function TaskCard({ task, onEdit, onDelete, onMove }) {
     const [dragging, setDragging] = useState(false);

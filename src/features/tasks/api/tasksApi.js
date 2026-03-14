@@ -73,7 +73,7 @@ export const tasksApi = {
         const updated = [...tasks, newTask];
         localStorage.setItem(`tf_tasks_${projectId}`, JSON.stringify(updated));
         return newTask;
-    },
+    },  
     update(projectId, taskId, patch) {
         const tasks = JSON.parse(localStorage.getItem(`tf_tasks_${projectId}`) || "null") || defaultTasks(projectId);
         const updated = tasks.map(t => t.id === taskId ? { ...t, ...patch } : t);

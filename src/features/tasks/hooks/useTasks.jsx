@@ -1,6 +1,6 @@
 import { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addTask, setLoading, setTasks } from "../taskSlice";
+import { addTask, setLoading, setTasks, updateTask as updater, deleteTask as delTask } from "../taskSlice";
 import { tasksApi } from "../api/tasksApi";
 
 export function useTasks(projectId) {
@@ -22,13 +22,13 @@ export function useTasks(projectId) {
 
     const updateTask = (taskId, patch) => {
         const t = tasksApi.update(projectId, taskId, patch);
-        dispatch(updateTask(t));
+        dispatch(updater(t));
         return t;
     };
 
     const deleteTask = (taskId) => {
         tasksApi.delete(projectId, taskId);
-        dispatch(deleteTask(taskId));
+        dispatch(delTask(taskId));
     };
 
     const moveTask = (taskId, newStatus) => {
